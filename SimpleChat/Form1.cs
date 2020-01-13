@@ -43,5 +43,51 @@ namespace SimpleChat
             }
             return "127.0.0.1";
         }
+
+        private void btnHost_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConn_Click(object sender, EventArgs e)
+        {
+            loc = new IPEndPoint(IPAddress.Parse(txtLocIP.Text), Convert.ToInt32(txtLocPort.Text));
+            rem = new IPEndPoint(IPAddress.Parse(txtRemIP.Text), Convert.ToInt32(txtRemPort.Text));
+            soc.Bind(loc);
+
+            soc.Connect(rem);
+
+            buffer = new byte[1024];
+
+            soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
+        }
+
+        private void acall(IAsyncResult ar)
+        {
+            try
+            {
+                //data = ar.AsyncState;
+                int rec = soc.EndReceive(ar);
+                byte[] data = new byte[rec];
+                Array.Copy(buffer, data, rec);
+                rtxtLog.AppendText("Them: " + Encoding.ASCII.GetString(data) + '\n');
+                soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
+            rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtLocIP.Text = "127.0.0.1";
+            txtRemIP.Text = "127.0.0.1";
+            txtLocPort.Text = "1234";
+            txtRemPort.Text = "1234";
+        }
     }
 }

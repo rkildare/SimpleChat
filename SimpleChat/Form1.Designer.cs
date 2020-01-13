@@ -43,6 +43,7 @@
             this.rtxtLog = new System.Windows.Forms.RichTextBox();
             this.rtxtOut = new System.Windows.Forms.RichTextBox();
             this.btnSend = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -145,6 +146,7 @@
             this.btnHost.TabIndex = 5;
             this.btnHost.Text = "Host";
             this.btnHost.UseVisualStyleBackColor = true;
+            this.btnHost.Click += new System.EventHandler(this.btnHost_Click);
             // 
             // btnConn
             // 
@@ -154,6 +156,7 @@
             this.btnConn.TabIndex = 6;
             this.btnConn.Text = "Connect";
             this.btnConn.UseVisualStyleBackColor = true;
+            this.btnConn.Click += new System.EventHandler(this.btnConn_Click);
             // 
             // rtxtLog
             // 
@@ -179,12 +182,24 @@
             this.btnSend.TabIndex = 9;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Debug";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 426);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.rtxtOut);
             this.Controls.Add(this.rtxtLog);
@@ -220,6 +235,7 @@
         private System.Windows.Forms.RichTextBox rtxtLog;
         private System.Windows.Forms.RichTextBox rtxtOut;
         private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.Button button1;
     }
 }
 
