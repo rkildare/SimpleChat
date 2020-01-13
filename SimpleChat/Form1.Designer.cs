@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtLocIP = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLocPort = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtLocIP = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtRemPort = new System.Windows.Forms.TextBox();
@@ -61,22 +61,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Local";
             // 
-            // txtLocIP
-            // 
-            this.txtLocIP.Location = new System.Drawing.Point(70, 13);
-            this.txtLocIP.Name = "txtLocIP";
-            this.txtLocIP.Size = new System.Drawing.Size(100, 20);
-            this.txtLocIP.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "IP Address";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -92,6 +76,22 @@
             this.txtLocPort.Name = "txtLocPort";
             this.txtLocPort.Size = new System.Drawing.Size(100, 20);
             this.txtLocPort.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "IP Address";
+            // 
+            // txtLocIP
+            // 
+            this.txtLocIP.Location = new System.Drawing.Point(70, 13);
+            this.txtLocIP.Name = "txtLocIP";
+            this.txtLocIP.Size = new System.Drawing.Size(100, 20);
+            this.txtLocIP.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -173,6 +173,7 @@
             this.rtxtOut.Size = new System.Drawing.Size(694, 64);
             this.rtxtOut.TabIndex = 8;
             this.rtxtOut.Text = "";
+            this.rtxtOut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtxtOut_KeyPress);
             // 
             // btnSend
             // 

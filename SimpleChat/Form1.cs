@@ -66,7 +66,6 @@ namespace SimpleChat
         {
             try
             {
-                //data = ar.AsyncState;
                 int rec = soc.EndReceive(ar);
                 byte[] data = new byte[rec];
                 Array.Copy(buffer, data, rec);
@@ -78,8 +77,7 @@ namespace SimpleChat
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
-            rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
+            SendMsg();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -88,6 +86,19 @@ namespace SimpleChat
             txtRemIP.Text = "127.0.0.1";
             txtLocPort.Text = "1234";
             txtRemPort.Text = "1234";
+        }
+
+        private void rtxtOut_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendMsg();
+            }
+        }
+        private void SendMsg()
+        {
+            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
+            rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
         }
     }
 }
