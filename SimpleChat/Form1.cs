@@ -92,6 +92,7 @@ namespace SimpleChat
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.SuppressKeyPress = true;
                 SendMsg();
             }
         }
@@ -99,6 +100,8 @@ namespace SimpleChat
         {
             soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
             rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
+            //rtxtOut.Text = "";
+            rtxtOut.Clear();
         }
     }
 }
