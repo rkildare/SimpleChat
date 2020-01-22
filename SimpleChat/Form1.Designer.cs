@@ -162,6 +162,7 @@
             // 
             this.rtxtLog.Location = new System.Drawing.Point(14, 91);
             this.rtxtLog.Name = "rtxtLog";
+            this.rtxtLog.ReadOnly = true;
             this.rtxtLog.Size = new System.Drawing.Size(774, 250);
             this.rtxtLog.TabIndex = 7;
             this.rtxtLog.Text = "";

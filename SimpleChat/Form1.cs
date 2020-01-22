@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Media;
 
 namespace SimpleChat
 {
@@ -60,6 +61,10 @@ namespace SimpleChat
             buffer = new byte[1024];
 
             soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
+
+            btnConn.Enabled = false;
+            btnHost.Enabled = false;
+            button1.Enabled = false;
         }
 
         private void acall(IAsyncResult ar)
@@ -70,6 +75,8 @@ namespace SimpleChat
                 byte[] data = new byte[rec];
                 Array.Copy(buffer, data, rec);
                 rtxtLog.AppendText("Them: " + Encoding.ASCII.GetString(data) + '\n');
+                SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech On.wav");
+                sound.Play();
                 soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
@@ -102,6 +109,8 @@ namespace SimpleChat
             rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
             //rtxtOut.Text = "";
             rtxtOut.Clear();
+            SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech Sleep.wav");
+            sound.Play();
         }
     }
 }
