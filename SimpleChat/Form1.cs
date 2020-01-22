@@ -74,7 +74,7 @@ namespace SimpleChat
                 int rec = soc.EndReceive(ar);
                 byte[] data = new byte[rec];
                 Array.Copy(buffer, data, rec);
-                rtxtLog.AppendText("Them: " + Encoding.ASCII.GetString(data) + '\n');
+                rtxtLog.AppendText(Encoding.ASCII.GetString(data) + '\n');
                 SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech On.wav");
                 sound.Play();
                 soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
@@ -105,7 +105,7 @@ namespace SimpleChat
         }
         private void SendMsg()
         {
-            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
+            soc.Send(Encoding.ASCII.GetBytes(txtUser.Text + ": " + rtxtOut.Text));
             rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
             //rtxtOut.Text = "";
             rtxtOut.Clear();
