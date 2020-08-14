@@ -35,7 +35,7 @@ namespace SimpleChat
         {
             IPHostEntry iphost;
             iphost = Dns.GetHostEntry(Dns.GetHostName());
-            foreach(IPAddress ip in iphost.AddressList)
+            foreach (IPAddress ip in iphost.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
@@ -74,7 +74,8 @@ namespace SimpleChat
                 int rec = soc.EndReceive(ar);
                 byte[] data = new byte[rec];
                 Array.Copy(buffer, data, rec);
-                rtxtLog.AppendText(Encoding.ASCII.GetString(data) + '\n');
+                rtxtLog.AppendText(Encoding.ASCII.GetString(data));
+                //rtxtLog.AppendText(Encoding.ASCII.GetString(data) + '\n');
                 SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech On.wav");
                 sound.Play();
                 soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
@@ -105,8 +106,9 @@ namespace SimpleChat
         }
         private void SendMsg()
         {
-            soc.Send(Encoding.ASCII.GetBytes(txtUser.Text + ": " + rtxtOut.Text));
-            rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
+            //soc.Send(Encoding.ASCII.GetBytes(txtUser.Text + ": " + rtxtOut.Text + "\n"));
+            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text + "\n"));
+            //rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
             //rtxtOut.Text = "";
             rtxtOut.Clear();
             SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech Sleep.wav");
