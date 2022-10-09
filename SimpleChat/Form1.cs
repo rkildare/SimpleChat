@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,7 +35,7 @@ namespace SimpleChat
         {
             IPHostEntry iphost;
             iphost = Dns.GetHostEntry(Dns.GetHostName());
-            foreach(IPAddress ip in iphost.AddressList)
+            foreach (IPAddress ip in iphost.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
