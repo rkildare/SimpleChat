@@ -49,6 +49,7 @@ namespace SimpleChat
 
         private void btnHost_Click(object sender, EventArgs e)
         {
+            /*
             TcpListener server;
             Console.WriteLine("Building...");
             server = new TcpListener(IPAddress.Parse(txtLocIP.Text), Convert.ToInt32(txtLocPort.Text));
@@ -61,7 +62,7 @@ namespace SimpleChat
             Console.WriteLine("New Connection!");
             soc = client.Client;
             soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Acall), soc);
-
+            */
         }
 
         private void btnConn_Click(object sender, EventArgs e)
@@ -88,7 +89,7 @@ namespace SimpleChat
                 int rec = soc.EndReceive(ar);
                 byte[] data = new byte[rec];
                 Array.Copy(buffer, data, rec);
-                rtxtLog.AppendText("Them: " + Encoding.ASCII.GetString(data) + '\n');
+                BeginInvoke(new Action( () => rtxtLog.AppendText(Encoding.ASCII.GetString(data) + '\n')));
                 SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech On.wav");
                 sound.Play();
                 soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Acall), soc);
@@ -119,8 +120,8 @@ namespace SimpleChat
         }
         private void SendMsg()
         {
-            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text));
-            rtxtLog.AppendText("Me: " + rtxtOut.Text + '\n');
+            soc.Send(Encoding.ASCII.GetBytes(rtxtOut.Text + '\n'));
+            //rtxtLog.AppendText(rtxtOut.Text + '\n');
             //rtxtOut.Text = "";
             rtxtOut.Clear();
             SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech Sleep.wav");
