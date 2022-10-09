@@ -45,8 +45,22 @@ namespace SimpleChat
             return "127.0.0.1";
         }
 
+        TcpClient client;
+
         private void btnHost_Click(object sender, EventArgs e)
         {
+            TcpListener server;
+            Console.WriteLine("Building...");
+            server = new TcpListener(IPAddress.Parse(txtLocIP.Text), Convert.ToInt32(txtLocPort.Text));
+            Console.WriteLine("Starting...");
+            server.Start();
+            Console.WriteLine("Waiting...");
+            Console.WriteLine("Waiting...");
+            Console.WriteLine("Did it write?");
+            client = server.AcceptTcpClient();
+            Console.WriteLine("New Connection!");
+            soc = client.Client;
+            soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Acall), soc);
 
         }
 
@@ -54,20 +68,20 @@ namespace SimpleChat
         {
             loc = new IPEndPoint(IPAddress.Parse(txtLocIP.Text), Convert.ToInt32(txtLocPort.Text));
             rem = new IPEndPoint(IPAddress.Parse(txtRemIP.Text), Convert.ToInt32(txtRemPort.Text));
-            soc.Bind(loc);
+            //soc.Bind(loc);
 
             soc.Connect(rem);
 
             buffer = new byte[1024];
 
-            soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
+            soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Acall), soc);
 
             btnConn.Enabled = false;
             btnHost.Enabled = false;
             button1.Enabled = false;
         }
 
-        private void acall(IAsyncResult ar)
+        private void Acall(IAsyncResult ar)
         {
             try
             {
@@ -78,7 +92,7 @@ namespace SimpleChat
                 //rtxtLog.AppendText(Encoding.ASCII.GetString(data) + '\n');
                 SoundPlayer sound = new SoundPlayer(@"C:\Windows\Media\Speech On.wav");
                 sound.Play();
-                soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(acall), soc);
+                soc.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Acall), soc);
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
